@@ -1,9 +1,11 @@
+import sys
+
 for _ in range(3):
-    T = int(input())
+    T = int(sys.stdin.readline())
     sum = 0
 
     for i in range(T):
-        sum += int(input())
+        sum += int(sys.stdin.readline())
     
     if sum > 0:
         print("+")
