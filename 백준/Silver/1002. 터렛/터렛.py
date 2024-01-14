@@ -1,29 +1,35 @@
-T = int(input())
-for _ in range(T):
-    x1, y1, r1, x2, y2, r2 = map(int,input().split())
-    # 두 원 사이 거리
-    r = ((x2-x1)**2 + (y2-y1)**2)**0.5
-    # 작은 원의 직경
-    smaller = min(r1, r2)
-    # 큰 원의 직경 
-    bigger = max(r1, r2)
+import math
 
-    # 두 원이 일치한다.
+T = int(input())
+
+for _ in range(T):
+    x1, y1, r1, x2, y2, r2 = map(int, input().split())
+
+    # dist1 = 두 점의 직선 거리 (두 원의 중심간 거리)
+    dist1 = math.sqrt((x1-x2)**2 + (y1-y2)**2)
+
+    # dist2 = 두 원의 반지름의 합
+    dist2 = abs(r1+r2)
+
+    # dist3 = 두 원의 반지름의 차
+    dist3 = abs(r1-r2)
+
+    # 두 원이 같을 때 ( 무한대 -> -1출력)
     if x1 == x2 and y1 == y2 and r1 == r2:
         print(-1)
-    
-    # 밖에서 두 원이 만나지 않는다
-    elif  r > smaller + bigger:
-        print(0)
-    
-    # 한 원이 다른원을 포함하면서, 만나지 않는다.
-    elif bigger > smaller + r:
+
+    # 두 원이 서로 안 만날 때
+    elif dist1 > dist2 or dist1 < dist3:
         print(0)
 
-    # 두 원이 한 점에서 만난다 ( 밖에서든 안에서든 )
-    elif r == bigger + smaller or bigger == r + smaller:
+    # 한 점에서 만날 때
+    elif dist1 == dist2 or dist3 == dist1:
         print(1)
-    
-    # 두 점에서 만난다
+
+    # 두 점에서 만날 때
     else:
         print(2)
+
+
+
+
